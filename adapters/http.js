@@ -1,7 +1,7 @@
 var url    = require('url')
   , http   = require('http')
   , https  = require('https')
-  , extend = require('util')._extend
+  , merge  = require('deeply')
   , typeOf = require('precise-typeof')
   ;
 
@@ -74,5 +74,5 @@ function request(resource)
 
   client = endpoint.protocol == 'https:' ? https : http;
 
-  return client.request(extend({agent: false, method: 'GET'}, endpoint));
+  return client.request(merge({agent: false, method: 'GET'}, endpoint));
 }

@@ -32,6 +32,8 @@
     "memcache-server-stream": "alexindigo/node-memcache-server-stream"
   },
   "dependencies": {
+    "asynckit": "^0.3.0",
+    "deeply": "^2.0.1",
     "precise-typeof": "^1.0.2"
   }
 }

@@ -49,7 +49,7 @@ test('does not wait for full response to come in', function(t)
   t.plan(3);
 
   var urlPath = '/slow';
-  var begin = process.hrtime();
+  var start = process.hrtime();
 
   var server = createServer(function(request)
   {
@@ -61,7 +61,7 @@ test('does not wait for full response to come in', function(t)
   {
     httpAdapter('http://localhost:' + port + urlPath, function(ok)
     {
-      var diff = process.hrtime(begin);
+      var diff = process.hrtime(start);
       t.ok(diff[0] < 2, 'expect response time to be less than 2 seconds');
       t.ok(ok, 'should return true');
       server.close();
