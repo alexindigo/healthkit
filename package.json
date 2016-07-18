@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js adapters/*.js lib/*.js test/*.js",
-    "test": "istanbul cover tape 'test/test-*.js'"
+    "test": "istanbul cover tape -- 'test/test-*.js'"
   },
   "pre-commit":
   [
