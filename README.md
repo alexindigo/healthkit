@@ -1,4 +1,4 @@
-# healthkit
+# healthkit [![NPM Module](https://img.shields.io/npm/v/healthkit.svg?style=flat)](https://www.npmjs.com/package/healthkit)
 
 Health check utility library
 
