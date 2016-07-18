@@ -4,7 +4,7 @@ instrumentation:
     extensions:
         - .js
     default-excludes: true
-    excludes: ['test.js', '**/node_modules/**']
+    excludes: ['test_memcache.js', '**/node_modules/**']
     compact: false
 reporting:
     root: ./coverage/tmp

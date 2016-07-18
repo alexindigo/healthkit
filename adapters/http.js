@@ -28,9 +28,9 @@ function httpAdapter(resource, callback)
     return;
   }
 
-  clientRequest.on('error', function()
+  clientRequest.on('error', function(error)
   {
-    callback(false);
+    callback(false, error);
   });
 
   clientRequest.on('response', function(response)
@@ -44,7 +44,7 @@ function httpAdapter(resource, callback)
 
     clientRequest.abort();
 
-    callback(status);
+    callback(status, {status: response.statusCode, headers: response.headers});
   });
 
   clientRequest.end();

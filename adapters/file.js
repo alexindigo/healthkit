@@ -15,7 +15,7 @@ module.exports = fileAdapter;
  */
 function fileAdapter(resource, callback)
 {
-  exists(resource, function(err, result)
+  exists(resource, function(err, result, stats)
   {
     // not really interested in errors at this point
     // TODO: provide logging functionality - bole?
@@ -25,7 +25,7 @@ function fileAdapter(resource, callback)
     }
     else
     {
-      callback(true);
+      callback(true, {size: stats.size, ctime: stats.ctime, mtime: stats.mtime});
     }
   });
 
@@ -48,15 +48,15 @@ function exists(filepath, callback)
     return;
   }
 
-  fs.stat(path.resolve(filepath), function(err)
+  fs.stat(path.resolve(filepath), function(err, stats)
   {
     if (err)
     {
-      callback(err.code != 'ENOENT' ? err : null, false);
+      callback(err.code != 'ENOENT' ? err : null, false, stats);
     }
     else
     {
-      callback(null, true);
+      callback(null, true, stats);
     }
   });
 }

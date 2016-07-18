@@ -8,6 +8,8 @@
 .travis.yml
 appveyor.yml
 
+test_memcache.js
+
 coverage
 node_modules
 test
