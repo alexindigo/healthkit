@@ -2,11 +2,11 @@
 
 Health check utility library
 
-[![Linux Build](https://img.shields.io/travis/alexindigo/healthkit/v0.1.0.svg?label=linux:0.12-6.x&style=flat)](https://travis-ci.org/alexindigo/healthkit)
-[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/healthkit/v0.1.0.svg?label=windows:0.12-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/healthkit)
+[![Linux Build](https://img.shields.io/travis/alexindigo/healthkit/v0.1.1.svg?label=linux:0.12-6.x&style=flat)](https://travis-ci.org/alexindigo/healthkit)
+[![Windows Build](https://img.shields.io/appveyor/ci/alexindigo/healthkit/v0.1.1.svg?label=windows:0.12-6.x&style=flat)](https://ci.appveyor.com/project/alexindigo/healthkit)
 
-[![Coverage Status](https://img.shields.io/coveralls/alexindigo/healthkit/v0.1.0.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/healthkit?branch=master)
-[![Dependency Status](https://img.shields.io/david/alexindigo/healthkit/v0.1.0.svg?style=flat)](https://david-dm.org/alexindigo/healthkit)
+[![Coverage Status](https://img.shields.io/coveralls/alexindigo/healthkit/v0.1.1.svg?label=code+coverage&style=flat)](https://coveralls.io/github/alexindigo/healthkit?branch=master)
+[![Dependency Status](https://img.shields.io/david/alexindigo/healthkit/v0.1.1.svg?style=flat)](https://david-dm.org/alexindigo/healthkit)
 [![bitHound Overall Score](https://www.bithound.io/github/alexindigo/healthkit/badges/score.svg)](https://www.bithound.io/github/alexindigo/healthkit)
 
 <!-- [![Readme](https://img.shields.io/badge/readme-tested-brightgreen.svg?style=flat)](https://www.npmjs.com/package/reamde) -->
