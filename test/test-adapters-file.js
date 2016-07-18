@@ -43,11 +43,7 @@ test('does not throw on inaccessible file', function(t)
 {
   // no luck on windows
   // re: https://github.com/nodejs/node-v0.x-archive/issues/4812
-  if (platform == 'win32')
-  {
-    t.skip();
-    return;
-  }
+  if (platform == 'win32') return t.end();
 
   t.plan(1);
 

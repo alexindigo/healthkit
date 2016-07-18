@@ -18,10 +18,9 @@ function fileAdapter(resource, callback)
   exists(resource, function(err, result, stats)
   {
     // not really interested in errors at this point
-    // TODO: provide logging functionality - bole?
     if (err || !result)
     {
-      callback(false);
+      callback(false, err);
     }
     else
     {

@@ -20,8 +20,7 @@ function httpAdapter(resource, callback)
 {
   var clientRequest = request(resource);
 
-  // not really interested in errors at this point
-  // TODO: provide logging functionality - bole?
+  // couldn't even start
   if (!clientRequest)
   {
     callback(false);

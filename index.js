@@ -216,7 +216,6 @@ function checkResources(adapter, resources, callback)
 
       if (typeOf(checkResult) == 'boolean')
       {
-        // TODO: Propagate errored results to downstream
         cb(checkResult ? null : new Error('Unable to access <' + src + '>'), combinedResponse);
       }
       // must be internal/adapter error
