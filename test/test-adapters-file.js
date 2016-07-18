@@ -1,6 +1,7 @@
 var fs          = require('fs')
   , path        = require('path')
   , test        = require('tape')
+  , platform    = require('os').platform()
   , fileAdapter = require('../adapters/file.js')
   ;
 
@@ -40,6 +41,14 @@ test('checks absolute path', function(t)
 
 test('does not throw on inaccessible file', function(t)
 {
+  // no luck on windows
+  // re: https://github.com/nodejs/node-v0.x-archive/issues/4812
+  if (platform == 'win32')
+  {
+    t.skip();
+    return;
+  }
+
   t.plan(1);
 
   var basedir  = path.resolve('test/fixtures/protected')
