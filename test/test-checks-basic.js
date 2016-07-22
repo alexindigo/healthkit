@@ -1,13 +1,12 @@
+var fs        = require('fs');
 var healthkit = require('../');
 var test      = require('tape');
-
-var expectedCode = 500;
 
 var basicChecks = [
 	// first check for lets-drain signal file
   {
     status: 404, // respond with 404 if file present
-    file: '/etc/consul/test_file.exists'
+    file: 'test/fixtures/healthkit_test_file.exists'
   },
   // second check for underlying endpoint
   // proceeded here if previous check failed
@@ -30,7 +29,22 @@ test('running basic check', function(t)
 
   healthkit(basicChecks, function(code, result)
   {
-    t.equal(code, expectedCode, 'should return status code `' + expectedCode + '`');
+    t.equal(code, 500, 'should return status code `500`');
     t.deepEqual(result, undefined, 'should not have any extra results returned.');
+  });
+});
+
+test('should return 404 if file exists', function(t)
+{
+  t.plan(2);
+
+  fs.writeFileSync(basicChecks[0].file, '');
+
+  healthkit(basicChecks, function(code, result)
+  {
+    t.equal(code, 404, 'should return status code `404`');
+    t.equal(result.file[0].resource, basicChecks[0].file, 'should have file stats returned.');
+
+    fs.unlinkSync(basicChecks[0].file);
   });
 });

@@ -31,6 +31,10 @@ function healthkit(checks, options, callback)
 {
   var context = {};
 
+  // decouple checks object
+  // to allow it's modifications downstream
+  checks = merge(checks);
+
   // make `options` optional :)
   if (typeOf(options) == 'function')
   {

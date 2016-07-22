@@ -1,6 +1,6 @@
 {
   "name": "healthkit",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Health check utility library",
   "main": "index.js",
   "scripts": {
