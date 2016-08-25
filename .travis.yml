@@ -5,13 +5,13 @@ node_js:
   - "iojs"
   - "4"
   - "5"
-  - "stable"
+  - "6"
 script:
   - node --version
   - npm --version
   # linting
   - npm run lint
   # nodejs testing
-  - npm run test
+  - npm run cover
 after_success:
   - "cat coverage/lcov.info | ./node_modules/.bin/coveralls"

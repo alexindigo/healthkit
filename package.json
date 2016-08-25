@@ -5,8 +5,13 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint *.js adapters/*.js lib/*.js test/*.js",
-    "test": "istanbul cover tape test/test-*.js | tap-spec",
-    "win-test": "tape test/test-*.js"
+    "test": "tape test/test-*.js",
+    "cover": "istanbul cover tape test/test-*.js | tap-spec",
+    "get-version": "node -e \"console.log(require('./package.json').version)\"",
+    "update-readme": "sed -i.bak 's/\\/master\\.svg/\\/v'$(npm --silent run get-version)'.svg/g' README.md",
+    "restore-readme": "mv README.md.bak README.md",
+    "prepublish": "in-publish && npm run update-readme || not-in-publish",
+    "postpublish": "npm run restore-readme"
   },
   "pre-commit": [
     "lint",
@@ -31,16 +36,17 @@
   },
   "homepage": "https://github.com/alexindigo/healthkit#readme",
   "devDependencies": {
-    "coveralls": "^2.11.11",
+    "coveralls": "^2.11.12",
     "eslint": "^2.13.1",
-    "istanbul": "^0.4.4",
+    "in-publish": "^2.0.0",
+    "istanbul": "^0.4.5",
     "pre-commit": "^1.1.3",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
   },
   "dependencies": {
     "asynckit": "^0.4.0",
-    "deeply": "^2.0.1",
+    "deeply": "^2.0.3",
     "precise-typeof": "^1.0.2"
   }
 }

@@ -1,17 +1,10 @@
-.DS_Store
-.editorconfig
-.eslintignore
-.eslintrc
-.gitignore
-.istanbul.yml
-.npmignore
-.travis.yml
 appveyor.yml
-
 test_memcache.js
 
 coverage
 node_modules
 test
 
+.*
 *.log
+*.bak

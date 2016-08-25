@@ -7,11 +7,7 @@ test('edge case: no successful checks', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, http: 'http://nope.no.nay/never'}, {status: 300, file: '/non/existent/file/I/hope'}], function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, http: 'http://nope.no.nay/never'}, {status: 300, file: '/non/existent/file/I/hope'}], testFailureResponse.bind(null, t));
 });
 
 test('edge case: not array checks', function(t)
@@ -32,11 +28,7 @@ test('edge case: check adapter fails', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, someProto: 'will://fail'}], {adapters: {someProto: customAdapter}}, function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, someProto: 'will://fail'}], {adapters: {someProto: customAdapter}}, testFailureResponse.bind(null, t));
 
   /**
    * Fails check with error, instead of proper status
@@ -54,11 +46,7 @@ test('edge case: adapter times out', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, someProto: 'will://timeout'}], {adapters: {someProto: customAdapter}}, function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, someProto: 'will://timeout'}], {adapters: {someProto: customAdapter}}, testFailureResponse.bind(null, t));
 
   /**
    * Will never return
@@ -98,42 +86,41 @@ test('edge case: invalid defaults', function(t)
 {
   t.plan(2);
 
-  healthkit([{someProto: 'will://barf'}], {defaults: {status: false, failure: 0}}, function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{someProto: 'will://barf'}], {defaults: {status: false, failure: 0}}, testFailureResponse.bind(null, t));
 });
 
 test('edge case: invalid adapter', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, someProto: 'will://barf'}], {adapters: {someProto: 42}}, function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, someProto: 'will://barf'}], {adapters: {someProto: 42}}, testFailureResponse.bind(null, t));
 });
 
 test('edge case: invalid check', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, someProto: 'will://barf'}, 42], function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, someProto: 'will://barf'}, 'bad check'], testFailureResponse.bind(null, t));
 });
 
 test('edge case: invalid options', function(t)
 {
   t.plan(2);
 
-  healthkit([{status: 200, someProto: 'will://barf'}], 42, function(code, result)
-  {
-    t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
-    t.deepEqual(result, undefined, 'should not have any extra results returned.');
-  });
+  healthkit([{status: 200, someProto: 'will://barf'}], 'bad options', testFailureResponse.bind(null, t));
 });
+
+// --- Subroutines
+
+/**
+ * Tests for failure response code and expected empty result body
+ *
+ * @param {object} t - test instance
+ * @param {number} code - response code
+ * @param {mixed} result - response body
+ */
+function testFailureResponse(t, code, result)
+{
+  t.equal(code, healthkit.defaults.failure, 'should return default failure status code `' + healthkit.defaults.failure + '`');
+  t.deepEqual(result, undefined, 'should not have any extra results returned.');
+}
